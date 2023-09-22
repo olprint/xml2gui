@@ -1,0 +1,2 @@
+echo all: > Makefile
+echo | cat CMakeListsNOT.sh >> Makefile
