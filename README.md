@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.1.0)
+## XML to GUI Framework (v0.1.2)
 
 ### Welcome!
 For now, we have libraries that you can link to dynamically.  
