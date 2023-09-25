@@ -27,21 +27,21 @@ PASS_YOUR_XML_HERE should be an xml data like the one below:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <App
-	id="app"
-	width="800"
-	height="600"
-	background="#111111"
-	text="Hail Mary"
-	>
+        id="app"
+        width="800"
+        height="600"
+        background="#111111"
+        text="Hail Mary"
+>
 
-	<Image
-		id="input"
-		width="300"
-		height="300"
-		center=". | app"
-		src="Z:/images/1.png"
-		actions="click | drag"
-		/>
+    <Image
+            id="input"
+            width="300"
+            height="300"
+            center=". | app"
+            src="Z:/images/1.png"
+            actions="click | drag"
+    />
 </App>
 ```
 You are free to use the xml above!  
@@ -95,40 +95,39 @@ width = width of app * 2/3.
 ---
 
 #### Attributes
-| Attribute      | Application      | Example                                                                                                                                     |
-|----------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| id             | All              | id="myId1"                                                                                                                                  |
-| width          | All * | width="100"<br/><sup>1</sup>width=". \| app"<br/><sup>2</sup>width="?w \| app"<br/><sup>3</sup>width="?w * 2/3 \| app"                      |
-| height         | All * | ↑                                                                                                                                           |
-| widthMin       | App              | widthMin="100"                                                                                                                              |
-| heightMin      | App              | ↑                                                                                                                                           |
-| widthMax       | App              | ↑                                                                                                                                           |
-| heightMax      | App              | ↑                                                                                                                                           |
-| fullscreen     | App              | fullscreen="true"<br/>fullscreen="false"                                                                                                    |
-| text           | All              | text="Christlike"                                                                                                                           |
-| hint           | Widgets          | ↑                                                                                                                                           |
-| textColor      | Widgets          | textColor="#ff0000"<br/>textColor="#ff0000 \| #ffff00"                                                                                      |
-| hintColor      | Widgets          | ↑                                                                                                                                           |
-| background     | All              | textColor="#ff0000"                                                                                                                         |
-| textSize       | Widgets          | textSize="18"                                                                                                                               |
-| textAlign      | Input            | textAlign="left"<br/>textAlign="right"<br/>textAlign="center"                                                                               |
-| inputType      | Input            | inputType="text"<br/>inputType="password"<br/>inputType="int"<br/>inputType="float"                                                         |
-| left           | Widgets          | left="100"<br/><sup>4</sup>left=". \| app \| true"<br/><sup>5</sup>left="?x \| app \| false"<br/><sup>6</sup>left="?x * 2/3 \| app \| true" |
-| right          | Widgets          | ↑                                                                                                                                           |
-| top            | Widgets          | ↑                                                                                                                                           |
-| bottom         | Widgets          | ↑                                                                                                                                           |
-| center         | Widgets          | ↑                                                                                                                                           |
-| leftOffset     | Widgets          | [Options by query](#byQuery)                                                                                                                |
-| rightOffset    | Widgets          | ↑                                                                                                                                           |
-| topOffset      | Widgets          | ↑                                                                                                                                           |
-| bottomOffset   | Widgets          | ↑                                                                                                                                           |
-| visible        | Widgets          | visible="true"<br/>visible="false"                                                                                                          |
-| cursor         | All              | [Explained here](#cursor1)                                                                                                                  |
-| actions        | Widgets          | [Explained here](#actions1)                                                                                                                 |
-| src            | Image            | src="./sand.png"<br/>src="./a.png \| ./b.png"                                                                                               |
-| selectionStart | Editor           | selectionStart="12"                                                                                                                         |
-| selectionEnd   | Editor           | ↑                                                                                                                                           |
-| wrap           | Editor           | wrap="true"<br/>wrap="false"                                                                                                                |
+| Attribute            | Application      | Example                                                                                                                                     |
+|----------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| id                   | All              | id="myId1"                                                                                                                                  |
+| width                | All * | width="100"<br/><sup>1</sup>width=". \| app"<br/><sup>2</sup>width="?w \| app"<br/><sup>3</sup>width="?w * 2/3 \| app"                      |
+| height               | All * | ↑                                                                                                                                           |
+| widthMin             | App              | widthMin="100"                                                                                                                              |
+| heightMin            | App              | ↑                                                                                                                                           |
+| widthMax             | App              | ↑                                                                                                                                           |
+| heightMax            | App              | ↑                                                                                                                                           |
+| fullscreen           | App              | fullscreen="true"<br/>fullscreen="false"                                                                                                    |
+| text                 | All              | text="Christlike"                                                                                                                           |
+| hint                 | Widgets          | ↑                                                                                                                                           |
+| textColor            | Widgets          | textColor="#ff0000"<br/>textColor="#ff0000 \| #ffff00"                                                                                      |
+| hintColor            | Widgets          | ↑                                                                                                                                           |
+| background           | All              | textColor="#ff0000"                                                                                                                         |
+| textSize             | Widgets          | textSize="18"                                                                                                                               |
+| inputType            | Input            | inputType="text"<br/>inputType="password"<br/>inputType="int"<br/>inputType="float"                                                         |
+| left                 | Widgets          | left="100"<br/><sup>4</sup>left=". \| app \| true"<br/><sup>5</sup>left="?x \| app \| false"<br/><sup>6</sup>left="?x * 2/3 \| app \| true" |
+| right                | Widgets          | ↑                                                                                                                                           |
+| top                  | Widgets          | ↑                                                                                                                                           |
+| bottom               | Widgets          | ↑                                                                                                                                           |
+| center               | Widgets          | ↑                                                                                                                                           |
+| leftOffset           | Widgets          | [Options by query](#byQuery)                                                                                                                |
+| rightOffset          | Widgets          | ↑                                                                                                                                           |
+| topOffset            | Widgets          | ↑                                                                                                                                           |
+| bottomOffset         | Widgets          | ↑                                                                                                                                           |
+| visible              | Widgets          | visible="true"<br/>visible="false"                                                                                                          |
+| cursor               | All              | [Explained here](#cursor1)                                                                                                                  |
+| actions              | Widgets          | [Explained here](#actions1)                                                                                                                 |
+| src                  | Image            | src="./sand.png"<br/>src="./a.png \| ./b.png"                                                                                               |
+| selectionStart       | Editor           | selectionStart="12"                                                                                                                         |
+| selectionEnd         | Editor           | ↑                                                                                                                                           |
+| wrap                 | Editor           | wrap="true"<br/>wrap="false"                                                                                                                |
 ---
 
 ### API
@@ -171,9 +170,7 @@ void mcxml_set_textColor(const char* id, const char* value);
 void mcxml_set_hintColor(const char* id, const char* value);
 void mcxml_set_textSize(const char* id, const char* value);
 void mcxml_set_inputType(const char* id, const char* value);
-void mcxml_set_textAlign(const char* id, const char* value);
 void mcxml_set_visible(const char* id, const char* value);
-void mcxml_set_rotation(const char* id, const char* value);
 void mcxml_set_fullscreen(const char* id, const char* value);
 void mcxml_set_src(const char* id, const char* value);
 void mcxml_set_actions(const char* id, const char* value);
@@ -196,9 +193,7 @@ const char* mcxml_get_textColor(const char* id);
 const char* mcxml_get_hintColor(const char* id);
 int mcxml_get_textSize(const char* id);
 const char* mcxml_get_inputType(const char* id);
-const char* mcxml_get_textAlign(const char* id);
 bool mcxml_get_visible(const char* id);
-const char* mcxml_get_rotation(const char* id);
 const char* mcxml_get_src(const char* id);
 const char* mcxml_get_actions(const char* id);
 int mcxml_editor_get_caret(const char* id);
@@ -255,9 +250,7 @@ int mcxml_editor_get_caret(const char* id);
 | mcxml_set_hintColor                          | Set the hint color of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                           |
 | mcxml_set_textSize                           | Set the text size of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                           |
 | mcxml_set_inputType                          | Set the input type of Input.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                                  |
-| mcxml_set_textAlign                          | Set the text alignment of Input.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                              |
 | mcxml_set_visible                            | Set the visibility of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                          |
-| mcxml_set_rotation                           | Set the rotation of Label.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                                    |
 | mcxml_set_fullscreen                         | Make App fullscreen.<br/>- **id** The id of App.<br/>- **value** The value to be set.                                                                                                                                                                                                   |
 | mcxml_set_src                                | Set the image of Image.<br/>- **id** The id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                        |
 | <span id='actions1'></span>mcxml_set_actions | Set listeners on a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                |
@@ -283,9 +276,7 @@ int mcxml_editor_get_caret(const char* id);
 |mcxml_get_hintColor|Get the hint color of a widget.<br/>- **id** A widget id.<br/>Return: The hint color set to a widget. Supports bar separated values.|
 |mcxml_get_textSize|Get the text size of a widget.<br/>- **id** A widget id.<br/>Return: The text size set to a widget.|
 |mcxml_get_inputType|Get the input type of Input.<br/>- **id** The id.<br/>Return: The input type set to Input.|
-|mcxml_get_textAlign|Get the text alignment of Input.<br/>- **id** The id.<br/>Return: The text alignment set to Input.|
 |mcxml_get_visible|Get the visibility of a widget.<br/>- **id** A widget id.<br/>Return: The visibility set to a widget.|
-|mcxml_get_rotation|Get the rotation of Label.<br/>- **id** The id.<br/>Return: The rotation set to Label.|
 |mcxml_get_src|Get the image of Image.<br/>- **id** The id.<br/>Return: Images set to Image. Supports bar separated values.|
 |mcxml_get_actions|Get listeners of a widget.<br/>- **id** A widget id.<br/>Return: Widget listeners of a widget or an empty string if there is no action set.|
 
