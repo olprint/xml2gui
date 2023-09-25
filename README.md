@@ -1,7 +1,11 @@
 ## XML to GUI Framework (v0.1.2)
 
 ### Welcome!
-For now, we have libraries that you can link to dynamically.  
+- [x] C/C++
+- [x] Java/Kotlin
+- [x] Python
+
+---
 A simple C/C++ program would look like this:
 ```c
 int main() {
@@ -11,6 +15,7 @@ int main() {
 ```
 Now let us introduce xml2gui.
 ```c
+#include "../include/mcxml.h"
 int main() {
     // ...
     mcxml_loop("PASS_YOUR_XML_HERE");
@@ -49,11 +54,11 @@ But make sure you have something else in ```src="YOUR_IMAGE_HERE"``` since you d
 
 ---
 #### Widgets
-- Scroll  
-- Label  
+- Scroll
+- Label
 - Button
-- Image  
-- Input  
+- Image
+- Input
 - Editor
 ---
 
@@ -66,7 +71,7 @@ width = center of app.
 - <b>&gt;</b> right
 - <b>^</b> top
 - <b>v</b> bottom
-- <b>.</b> center  
+- <b>.</b> center
 
 <sup id='byQuery'>2</sup> <u>Options by query</u>.  
 width = width of app.
@@ -292,12 +297,6 @@ int mcxml_editor_get_caret(const char* id);
 |mcxml_editor_set_caret| Set insert position or selection.<br/>- **id** The id.<br/>- **value** The value to be set.  |
 |mcxml_editor_get_caret| Get insert position or selection.<br/>- **id** The id.<br/>Return: The start position.    |
 
-
----
-#### TODO
-- [x] C/C++
-- [x] Java/Kotlin
-- [x] Python
 
 ---
 **Please build apps for Jesus and Mary.**
