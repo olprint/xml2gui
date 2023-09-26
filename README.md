@@ -177,8 +177,8 @@ void mcxml_set_actions(const char* id, const char* value);
 void mcxml_set_autoFit(const char* id, const char* value);
 void mcxml_set_from(const char* id, const char* value);
 void mcxml_set_cursor(const char* id, const char* value);
-void mcxml_editor_set_selection(const char* id, int value);
-void mcxml_editor_set_selectionColor(const char* id, int value);
+void mcxml_editor_set_selection(const char* id, const char* value);
+void mcxml_editor_set_selectionColor(const char* id, const char* value);
 void mcxml_set();
 
 // Getters
@@ -199,7 +199,7 @@ const char* mcxml_get_inputType(const char* id);
 bool mcxml_get_visible(const char* id);
 const char* mcxml_get_src(const char* id);
 const char* mcxml_get_actions(const char* id);
-const char* mcxml_get_autoFit(const char* id);
+bool mcxml_get_autoFit(const char* id);
 const char* mcxml_get_from(const char* id);
 const char* mcxml_get_cursor(const char* id);
 const char* mcxml_editor_get_selection(const char* id);

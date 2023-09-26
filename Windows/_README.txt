@@ -12,7 +12,7 @@
 # ------------ Java/Kotlin ------------
 # Run
 [Option 1: IDE] Import xml2gui-0.1.0.jar and the IDE will handle the rest.
-[Option 2: Command Line] java --class-path "lib_Java,Kotlin(All)/xml2gui-0.1.0.jar" Example.java
+[Option 2: Command Line] java --class-path "lib_Java,Kotlin(All)/xml2gui-0.2.0.jar" Example.java
 
 
 
