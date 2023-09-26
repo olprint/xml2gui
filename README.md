@@ -95,39 +95,39 @@ width = width of app * 2/3.
 ---
 
 #### Attributes
-| Attribute            | Application      | Example                                                                                                                                     |
-|----------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| id                   | All              | id="myId1"                                                                                                                                  |
-| width                | All * | width="100"<br/><sup>1</sup>width=". \| app"<br/><sup>2</sup>width="?w \| app"<br/><sup>3</sup>width="?w * 2/3 \| app"                      |
-| height               | All * | ↑                                                                                                                                           |
-| widthMin             | App              | widthMin="100"                                                                                                                              |
-| heightMin            | App              | ↑                                                                                                                                           |
-| widthMax             | App              | ↑                                                                                                                                           |
-| heightMax            | App              | ↑                                                                                                                                           |
-| fullscreen           | App              | fullscreen="true"<br/>fullscreen="false"                                                                                                    |
-| text                 | All              | text="Christlike"                                                                                                                           |
-| hint                 | Widgets          | ↑                                                                                                                                           |
-| textColor            | Widgets          | textColor="#ff0000"<br/>textColor="#ff0000 \| #ffff00"                                                                                      |
-| hintColor            | Widgets          | ↑                                                                                                                                           |
-| background           | All              | textColor="#ff0000"                                                                                                                         |
-| textSize             | Widgets          | textSize="18"                                                                                                                               |
-| inputType            | Input            | inputType="text"<br/>inputType="password"<br/>inputType="int"<br/>inputType="float"                                                         |
-| left                 | Widgets          | left="100"<br/><sup>4</sup>left=". \| app \| true"<br/><sup>5</sup>left="?x \| app \| false"<br/><sup>6</sup>left="?x * 2/3 \| app \| true" |
-| right                | Widgets          | ↑                                                                                                                                           |
-| top                  | Widgets          | ↑                                                                                                                                           |
-| bottom               | Widgets          | ↑                                                                                                                                           |
-| center               | Widgets          | ↑                                                                                                                                           |
-| leftOffset           | Widgets          | [Options by query](#byQuery)                                                                                                                |
-| rightOffset          | Widgets          | ↑                                                                                                                                           |
-| topOffset            | Widgets          | ↑                                                                                                                                           |
-| bottomOffset         | Widgets          | ↑                                                                                                                                           |
-| visible              | Widgets          | visible="true"<br/>visible="false"                                                                                                          |
-| cursor               | All              | [Explained here](#cursor1)                                                                                                                  |
-| actions              | Widgets          | [Explained here](#actions1)                                                                                                                 |
-| src                  | Image            | src="./sand.png"<br/>src="./a.png \| ./b.png"                                                                                               |
-| selectionStart       | Editor           | selectionStart="12"                                                                                                                         |
-| selectionEnd         | Editor           | ↑                                                                                                                                           |
-| wrap                 | Editor           | wrap="true"<br/>wrap="false"                                                                                                                |
+| Attribute      | Application   | Example                                                                                                                                   |
+|----------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| id             | All           | id="myId1"                                                                                                                                |
+| width          | All *         | width="100"<br/><sup>1</sup>width=". \| app"<br/><sup>2</sup>width="w \| app"<br/><sup>3</sup>width="w * 2/3 \| app"                      |
+| height         | All *         | ↑                                                                                                                                         |
+| widthMin       | App           | widthMin="100"                                                                                                                            |
+| heightMin      | App           | ↑                                                                                                                                         |
+| widthMax       | App           | ↑                                                                                                                                         |
+| heightMax      | App           | ↑                                                                                                                                         |
+| fullscreen     | App           | fullscreen="true"<br/>fullscreen="false"                                                                                                  |
+| text           | All           | text="Christlike"                                                                                                                         |
+| hint           | Widgets       | ↑                                                                                                                                         |
+| textColor      | Widgets       | textColor="#ff0000"<br/>textColor="#ff0000 \| #ffff00"                                                                                    |
+| hintColor      | Widgets       | ↑                                                                                                                                         |
+| background     | All           | textColor="#ff0000"                                                                                                                       |
+| textSize       | Widgets       | textSize="18"                                                                                                                             |
+| inputType      | Input         | inputType="text"<br/>inputType="password"<br/>inputType="int"<br/>inputType="float"                                                       |
+| left           | Widgets       | left="100"<br/><sup>4</sup>left=". \| app \| true"<br/><sup>5</sup>left="x \| app \| false"<br/><sup>6</sup>left="x * 2/3 \| app \| true" |
+| right          | Widgets       | ↑                                                                                                                                         |
+| top            | Widgets       | ↑                                                                                                                                         |
+| bottom         | Widgets       | ↑                                                                                                                                         |
+| center         | Widgets       | ↑                                                                                                                                         |
+| leftOffset     | Widgets       | [Options by query](#byQuery)                                                                                                              |
+| rightOffset    | Widgets       | ↑                                                                                                                                         |
+| topOffset      | Widgets       | ↑                                                                                                                                         |
+| bottomOffset   | Widgets       | ↑                                                                                                                                         |
+| visible        | Widgets       | visible="true"<br/>visible="false"                                                                                                        |
+| cursor         | All           | [Explained here](#cursor1)                                                                                                                |
+| actions        | Widgets       | [Explained here](#actions1)                                                                                                               |
+| src            | Image         | src="./sand.png"<br/>src="./a.png \| ./b.png"                                                                                             |
+| selection      | Input, Editor | selection="12"<br/>selection="12\|15"                                                                                                     |
+| selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                           |
+| wrap           | Editor        | wrap="true"<br/>wrap="false"                                                                                                              |
 ---
 
 ### API
@@ -174,8 +174,11 @@ void mcxml_set_visible(const char* id, const char* value);
 void mcxml_set_fullscreen(const char* id, const char* value);
 void mcxml_set_src(const char* id, const char* value);
 void mcxml_set_actions(const char* id, const char* value);
+void mcxml_set_autoFit(const char* id, const char* value);
+void mcxml_set_from(const char* id, const char* value);
 void mcxml_set_cursor(const char* id, const char* value);
-void mcxml_editor_set_caret(const char* id, int value);
+void mcxml_editor_set_selection(const char* id, int value);
+void mcxml_editor_set_selectionColor(const char* id, int value);
 void mcxml_set();
 
 // Getters
@@ -196,7 +199,11 @@ const char* mcxml_get_inputType(const char* id);
 bool mcxml_get_visible(const char* id);
 const char* mcxml_get_src(const char* id);
 const char* mcxml_get_actions(const char* id);
-int mcxml_editor_get_caret(const char* id);
+const char* mcxml_get_autoFit(const char* id);
+const char* mcxml_get_from(const char* id);
+const char* mcxml_get_cursor(const char* id);
+const char* mcxml_editor_get_selection(const char* id);
+const char* mcxml_editor_get_selectionColor(const char* id);
 ```
 
 ### Documentation
@@ -239,10 +246,10 @@ int mcxml_editor_get_caret(const char* id);
 | mcxml_set_top                                | Set the top position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                        |
 | mcxml_set_bottom                             | Set the bottom position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                     |
 | mcxml_set_center                             | Set the center position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                     |
-| mcxml_set_leftOffset                         | Set the left offset of a widget.<br/>This will only be set when 'left' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                            |
-| mcxml_set_rightOffset                        | Set the right offset of a widget.<br/>This will only be set when 'right' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                           |
-| mcxml_set_topOffset                          | Set the top offset of a widget.<br/>This will only be set when 'top' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                               |
-| mcxml_set_bottomOffset                       | Set the bottom offset of a widget.<br/>This will only be set when 'bottom' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                         |
+| mcxml_set_leftOffset                         | Set the left offset of a widget.<br/>This will only be set when 'left' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                           |
+| mcxml_set_rightOffset                        | Set the right offset of a widget.<br/>This will only be set when 'right' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                         |
+| mcxml_set_topOffset                          | Set the top offset of a widget.<br/>This will only be set when 'top' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                             |
+| mcxml_set_bottomOffset                       | Set the bottom offset of a widget.<br/>This will only be set when 'bottom' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                       |
 | mcxml_set_background                         | Set the background color of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                      |
 | mcxml_set_text                               | Set the text of a widget or the title of App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                     |
 | mcxml_set_hint                               | Set the hint of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                |
@@ -255,38 +262,45 @@ int mcxml_editor_get_caret(const char* id);
 | mcxml_set_src                                | Set the image of Image.<br/>- **id** The id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                        |
 | <span id='actions1'></span>mcxml_set_actions | Set listeners on a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                |
 | <span id='cursor1'></span>mcxml_set_cursor   | Set the cursor type of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set. Available values: insert, hand, drag, ew (i.e. East-West), ns (i.e. North-South), ne (i.e. North-East), sw (i.e. South-West), nw (i.e. North-West), se (i.e. South-East). |
+| mcxml_set_autoFit                            | Neglect the width and height and make the widget fit to its text or image.                                                                                                                                                                                                              |
+| mcxml_set_from                               | Use attributes of another widget as basis.                                                                                                                                                                                                              |
 | mcxml_set                                    | Commit modifications made.                                                                                                                                                                                                                                                              |
 
 ---
 #### Getters
 
-|Function| Description |
-|--------|-|
-|mcxml_get_width|Get the width of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The width set to a widget or App.|
-|mcxml_get_height|Get the height of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The height set to a widget or App.|
-|mcxml_get_left|Get the left of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The left set to a widget or App.|
-|mcxml_get_right|Get the right of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The right set to a widget or App.|
-|mcxml_get_top|Get the top of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The top set to a widget or App.|
-|mcxml_get_bottom|Get the bottom of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The bottom set to a widget or App.|
-|mcxml_get_center|Get the center of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The center set to a widget or App.|
-|mcxml_get_background|Get the background color of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The background color set to a widget or App.|
-|mcxml_get_text|Get the text of a widget or the title of App.<br/>- **id** A widget or App id.<br/>Return: The text set to a widget or the title of App.|
-|mcxml_get_hint|Get the hint of a widget.<br/>- **id** A widget id.<br/>Return: The hint set to a widget.|
-|mcxml_get_textColor|Get the text color of a widget.<br/>- **id** A widget id.<br/>Return: The text color set to a widget. Supports bar separated values.|
-|mcxml_get_hintColor|Get the hint color of a widget.<br/>- **id** A widget id.<br/>Return: The hint color set to a widget. Supports bar separated values.|
-|mcxml_get_textSize|Get the text size of a widget.<br/>- **id** A widget id.<br/>Return: The text size set to a widget.|
-|mcxml_get_inputType|Get the input type of Input.<br/>- **id** The id.<br/>Return: The input type set to Input.|
-|mcxml_get_visible|Get the visibility of a widget.<br/>- **id** A widget id.<br/>Return: The visibility set to a widget.|
-|mcxml_get_src|Get the image of Image.<br/>- **id** The id.<br/>Return: Images set to Image. Supports bar separated values.|
-|mcxml_get_actions|Get listeners of a widget.<br/>- **id** A widget id.<br/>Return: Widget listeners of a widget or an empty string if there is no action set.|
+| Function             | Description                                                                                                                                 |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| mcxml_get_width      | Get the width of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The width set to a widget or App.                            |
+| mcxml_get_height     | Get the height of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The height set to a widget or App.                          |
+| mcxml_get_left       | Get the left of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The left set to a widget or App.                              |
+| mcxml_get_right      | Get the right of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The right set to a widget or App.                            |
+| mcxml_get_top        | Get the top of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The top set to a widget or App.                                |
+| mcxml_get_bottom     | Get the bottom of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The bottom set to a widget or App.                          |
+| mcxml_get_center     | Get the center of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The center set to a widget or App.                          |
+| mcxml_get_background | Get the background color of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The background color set to a widget or App.      |
+| mcxml_get_text       | Get the text of a widget or the title of App.<br/>- **id** A widget or App id.<br/>Return: The text set to a widget or the title of App.    |
+| mcxml_get_hint       | Get the hint of a widget.<br/>- **id** A widget id.<br/>Return: The hint set to a widget.                                                   |
+| mcxml_get_textColor  | Get the text color of a widget.<br/>- **id** A widget id.<br/>Return: The text color set to a widget. Supports bar separated values.        |
+| mcxml_get_hintColor  | Get the hint color of a widget.<br/>- **id** A widget id.<br/>Return: The hint color set to a widget. Supports bar separated values.        |
+| mcxml_get_textSize   | Get the text size of a widget.<br/>- **id** A widget id.<br/>Return: The text size set to a widget.                                         |
+| mcxml_get_inputType  | Get the input type of Input.<br/>- **id** The id.<br/>Return: The input type set to Input.                                                  |
+| mcxml_get_visible    | Get the visibility of a widget.<br/>- **id** A widget id.<br/>Return: The visibility set to a widget.                                       |
+| mcxml_get_src        | Get the image of Image.<br/>- **id** The id.<br/>Return: Images set to Image. Supports bar separated values.                                |
+| mcxml_get_actions    | Get listeners of a widget.<br/>- **id** A widget id.<br/>Return: Widget listeners of a widget or an empty string if there is no action set. |
+| mcxml_get_cursor     | Get the cursor type of a widget or App.                                                                                                     |
+| mcxml_get_autoFit    | Get the auto fit value of a widget.                                                                                                         |
+| mcxml_get_from       | Get the ID of the widget used as a basis.                                                                                       |
 
 ---
 #### Text Editor
 
-|Function| Description                                                                          |
-|--------|--------------------------------------------------------------------------------------|
-|mcxml_editor_set_caret| Set insert position or selection.<br/>- **id** The id.<br/>- **value** The value to be set.  |
-|mcxml_editor_get_caret| Get insert position or selection.<br/>- **id** The id.<br/>Return: The start position.    |
+| Function                        | Description                               |
+|---------------------------------|-------------------------------------------|
+| mcxml_editor_set_selection      | Set the insert position or the selection. |
+| mcxml_editor_set_selectionColor | Set the selection color.                  |
+| mcxml_editor_get_selection      | Get the insert position or the selection. |
+| mcxml_editor_get_selectionColor | Get the selection color.                  |
 
 
 ---
