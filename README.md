@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.1.2)
+## XML to GUI Framework (v0.2.0)
 
 ### Welcome!
 - [x] C/C++
