@@ -1,8 +1,6 @@
 ## XML to GUI Framework (v0.3.2)
-:red_circle: v0.4 is being worked on here: [Gitlab](https://gitlab.com/olprint/xml2gui)
+:pushpin: v0.4 is being worked on here: [Gitlab](https://gitlab.com/olprint/xml2gui)
 
-[-1-]
-[- 2 -]
 ### Welcome!
 - [x] C/C++
 - [x] Java/Kotlin
