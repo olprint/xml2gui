@@ -1,5 +1,4 @@
-## XML to GUI Framework (v0.3.2)
-:pushpin: v0.4 is being worked on here: [Gitlab](https://gitlab.com/olprint/xml2gui)
+## XML to GUI Framework (v0.4.x)
 
 ### Welcome!
 - [x] C/C++
@@ -14,7 +13,7 @@ int main() {
     return 0;
 }
 ```
-Now let us introduce xml2gui.
+Now let us introduce xml2gui:
 ```c
 #include "../include/mcxml.h"
 int main() {
@@ -23,7 +22,7 @@ int main() {
     return 0;
 }
 ```
-PASS_YOUR_XML_HERE should be an xml data like the one below:
+PASS_YOUR_XML_HERE should be an XML data like the one below:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -34,15 +33,19 @@ PASS_YOUR_XML_HERE should be an xml data like the one below:
         background="#111111"
         text="Hail Mary"
 >
-
+    
+    <!-- For widgets (i.e. App excluded), width, height, left, right, -->
+    <!-- top, bottom, center, and ...Offset support calculations. -->
     <Image
             id="input"
             width="300"
             height="300"
             center=". | app"
+            top="2*y-y | input,input"
             src="Z:/images/1.png"
             actions="click | drag"
     />
+    <!-- For List, Tree, Table, Chart, pass a JSON file or text to src. -->
 </App>
 ```
 You are free to use the xml above!  
@@ -61,7 +64,82 @@ But make sure you have something else in ```src="YOUR_IMAGE_HERE"``` since you d
 - Image
 - Input
 - Editor
+- List
+- Web
+- Tree
+- Table
+- Check
+- Chart
+- Progress
+- Choice
 ---
+
+#### Data for Image, List, Tree, Table & Chart
+`src="..."` is available for passing data to widgets.  
+Image: `src="IMAGE_HERE"`
+- PNG
+- JPG
+- SVG
+- GIF
+
+List: `src="JSON_HERE"`
+```json
+{
+    "ANYTHING0": {
+        "icon": "",
+        "value": "Apple"
+    },
+    "ANYTHING1": {
+        "icon": "",
+        "value": "Box"
+    }
+}
+```
+
+Tree: `src="JSON_HERE"`
+```json
+{
+    "ANYTHING0": {
+        "icon": "",
+        "value": "Folder1/MyMusic.mp3"
+    },
+    "ANYTHING1": {
+        "icon": "",
+        "value": "Folder1/MyMusicAbout.txt"
+    }
+}
+```
+
+Table: `src="JSON_HERE"`
+
+```json
+{
+    "mcxml_table_set_widths": "30|100|300",
+    "ANYTHING0": {
+        "icon": "",
+        "value": "1|Jesus|My Brother"
+    },
+    "ANYTHING1": {
+        "icon": "",
+        "value": "2|Mary|My Mother"
+    }
+}
+```
+
+Chart: `src="JSON_HERE"`
+```json
+{
+    "mcxml_chart_set_type": "bar",
+    "ANYTHING0": {
+        "icon": "",
+        "value": "80"
+    },
+    "ANYTHING1": {
+        "icon": "",
+        "value": "81"
+    }
+}
+```
 
 #### Options
 <b>*</b> *App* doesn't support options.  
@@ -112,7 +190,7 @@ width = width of app * 2/3.
 | hintColor      | Widgets       | ↑                                                                                                                                         |
 | background     | All           | textColor="#ff0000"                                                                                                                       |
 | textSize       | Widgets       | textSize="18"                                                                                                                             |
-| inputType      | Input         | inputType="text"<br/>inputType="password"<br/>inputType="int"<br/>inputType="float"                                                       |
+| type      | Widgets  | type="text"<br/>type="password"<br/>type="int"<br/>type="float"<br/>type="bar"<br/>type="pie"                    |
 | left           | Widgets       | left="100"<br/><sup>4</sup>left=". \| app \| true"<br/><sup>5</sup>left="x \| app \| false"<br/><sup>6</sup>left="x * 2/3 \| app \| true" |
 | right          | Widgets       | ↑                                                                                                                                         |
 | top            | Widgets       | ↑                                                                                                                                         |
@@ -127,7 +205,7 @@ width = width of app * 2/3.
 | actions        | Widgets       | [Explained here](#actions1)                                                                                                               |
 | src            | Image         | src="./sand.png"<br/>src="./a.png \| ./b.png"                                                                                             |
 | selection      | Input, Editor | selection="12"<br/>selection="12\|15"                                                                                                     |
-| selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                           |
+| selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                                                  |
 | wrap           | Editor        | wrap="true"<br/>wrap="false"                                                                                                              |
 ---
 
@@ -138,6 +216,9 @@ const char* mcxml_version();
 bool mcxml_add_widget(const char* widget, const char* idNew, const char* idDest);
 bool mcxml_remove_widget(const char* id);
 const char* mcxml_measure_text(const char* text, int fontSize);
+void mcxml_select(const char* id);
+const char* mcxml_selected();
+int mcxml_last_count();
 bool mcxml_loop(const char* xml);
 void mcxml_exit();
 
@@ -148,6 +229,14 @@ void mcxml_listener_hover(void (*ptr)(const char* id, const char* m));
 void mcxml_listener_drag(void (*ptr)(const char* id, const char* m));
 void mcxml_listener_keyboard(void (*ptr)(const char* id, const char* m));
 void mcxml_listener_resize(void (*ptr)(const char* id, const char* m));
+
+void mcxml_listener_for_list(void (*ptr)(const char* id, const char* m));
+void mcxml_listener_for_web(void (*ptr)(const char* id, const char* m));
+void mcxml_listener_for_tree(void (*ptr)(const char* id, const char* m));
+void mcxml_listener_for_table(void (*ptr)(const char* id, const char* m));
+void mcxml_listener_for_check(void (*ptr)(const char* id, const char* m));
+void mcxml_listener_for_chart(void (*ptr)(const char* id, const char* m));
+void mcxml_listener_for_choice(void (*ptr)(const char* id, const char* m));
 
 // Setters
 void mcxml_set_width(const char* id, const char* value);
@@ -171,7 +260,7 @@ void mcxml_set_hint(const char* id, const char* value);
 void mcxml_set_textColor(const char* id, const char* value);
 void mcxml_set_hintColor(const char* id, const char* value);
 void mcxml_set_textSize(const char* id, const char* value);
-void mcxml_set_inputType(const char* id, const char* value);
+void mcxml_set_type(const char* id, const char* value);
 void mcxml_set_visible(const char* id, const char* value);
 void mcxml_set_fullscreen(const char* id, const char* value);
 void mcxml_set_src(const char* id, const char* value);
@@ -181,7 +270,7 @@ void mcxml_set_from(const char* id, const char* value);
 void mcxml_set_cursor(const char* id, const char* value);
 void mcxml_editor_set_selection(const char* id, const char* value);
 void mcxml_editor_set_selectionColor(const char* id, const char* value);
-void mcxml_set();
+void mcxml_set(); // Needs to be called after other set operations.
 
 // Getters
 int mcxml_get_width(const char* id);
@@ -197,7 +286,7 @@ const char* mcxml_get_hint(const char* id);
 const char* mcxml_get_textColor(const char* id);
 const char* mcxml_get_hintColor(const char* id);
 int mcxml_get_textSize(const char* id);
-const char* mcxml_get_inputType(const char* id);
+const char* mcxml_get_type(const char* id);
 bool mcxml_get_visible(const char* id);
 const char* mcxml_get_src(const char* id);
 const char* mcxml_get_actions(const char* id);
@@ -219,20 +308,30 @@ const char* mcxml_editor_get_selectionColor(const char* id);
 |mcxml_add_widget| Add a new widget.<br/>- **widget** The widget type to add.<br/>- **idNew** A unique id to identify the widget.<br/>- **idDest** The id of App or the id of any Scroll widget.<br/>Return: true if successful, false if unsuccessful. |
 |mcxml_remove_widget| Remove a widget.<br/>- **id** A widget id.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                    |
 |mcxml_measure_text|Get the width and height of a text.|
+|mcxml_select|Select a widget.|
+|mcxml_selected|Get the selected widget.|
+|mcxml_last_count|If 'int*' is returned by any function, mcxml_last_count will hold its size.|
 |mcxml_loop| Start the app.<br/>- **xml** XML/MCXML to run.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                |
 |mcxml_exit| Close the app.                                                                                                                                                                                                                      |
 
 ---
 #### Listeners
 
-|Function| Description                                                                                                                                                                                                                                                                                            |
-|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|mcxml_listener_click| Called when any listening widget is clicked.<br/>A click widget listener can be set in the xml/mcxml with actions="click"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                    |
-|mcxml_listener_dbclick| Called when any listening widget is double clicked.<br/>A double click widget listener can be set in the xml/mcxml with actions="dbclick"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }. |
-|mcxml_listener_hover| Called when any listening widget is hovered.<br/>A hover widget listener can be set in the xml/mcxml with actions="hover"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                        |
-|mcxml_listener_drag| Called when any listening widget is dragged.<br/>A drag widget listener can be set in the xml/mcxml with actions="drag"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                           |
-|mcxml_listener_keyboard| When this global listener is set, all key events will be directed to it.<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                                                                                                                               |
-|mcxml_listener_resize| When this global listener is set, any App resize will be directed to it.<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                                                                                                                               |
+| Function                  | Description                                                                                                                                                                                                                                   |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mcxml_listener_click      | Called when any listening widget is clicked.<br/>A click widget listener can be set in the xml/mcxml with actions="click"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                 |
+| mcxml_listener_dbclick    | Called when any listening widget is double clicked.<br/>A double click widget listener can be set in the xml/mcxml with actions="dbclick"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }. |
+| mcxml_listener_hover      | Called when any listening widget is hovered.<br/>A hover widget listener can be set in the xml/mcxml with actions="hover"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                 |
+| mcxml_listener_drag       | Called when any listening widget is dragged.<br/>A drag widget listener can be set in the xml/mcxml with actions="drag"<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                   |
+| mcxml_listener_keyboard   | When this global listener is set, all key events will be directed to it.<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                                                                  |
+| mcxml_listener_resize     | When this global listener is set, any App resize will be directed to it.<br/>- **ptr** A function in the form void my_listener1(const char* id, const char* m){ /\*...\*/ }.                                                                  |
+| mcxml_listener_for_list   | Called when any List widget is interacted with.                                                                                                                                                                                               |
+| mcxml_listener_for_web    | Called when any Web widget is interacted with.                                                                                                                                                                                                |
+| mcxml_listener_for_tree   | Called when any Tree widget is interacted with.                                                                                                                                                                                               |
+| mcxml_listener_for_table  | Called when any Table widget is interacted with.                                                                                                                                                                                              |
+| mcxml_listener_for_check  | Called when any Check widget is interacted with.                                                                                                                                                                                                  |
+| mcxml_listener_for_chart  | Called when any Chart widget is interacted with.                                                                                                                                                                                              |
+| mcxml_listener_for_choice | Called when any Choice widget is interacted with.                                                                                                                                                                                             |
 
 ---
 #### Setters
@@ -260,12 +359,12 @@ const char* mcxml_editor_get_selectionColor(const char* id);
 | mcxml_set_textColor                          | Set the text color of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                             |
 | mcxml_set_hintColor                          | Set the hint color of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                             |
 | mcxml_set_textSize                           | Set the text size of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                             |
-| mcxml_set_inputType                          | Set the input type of Input.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                                                                    |
+| mcxml_set_type                          | Set the input type of Input.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                                                                    |
 | mcxml_set_visible                            | Set the visibility of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                            |
 | mcxml_set_fullscreen                         | Make App fullscreen.<br/>- **id** The id of App.<br/>- **value** The value to be set.                                                                                                                                                                                                                                     |
 | mcxml_set_src                                | Set the image of Image.<br/>- **id** The id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                          |
-| <span id='actions1'></span>mcxml_set_actions | Set listeners on a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                  |
-| <span id='cursor1'></span>mcxml_set_cursor   | Set the cursor type of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set. Available values: default, none, insert, hand, drag, cross, help, load, ew (i.e. East-West), ns (i.e. North-South), ne (i.e. North-East), sw (i.e. South-West), nw (i.e. North-West), se (i.e. South-East). |
+| <span id='actions1'>mcxml_set_actions | Set listeners on a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                  |
+| <span id='cursor1'>mcxml_set_cursor   | Set the cursor type of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set. Available values: default, none, insert, hand, drag, cross, help, load, ew (i.e. East-West), ns (i.e. North-South), ne (i.e. North-East), sw (i.e. South-West), nw (i.e. North-West), se (i.e. South-East). |
 | mcxml_set_autoFit                            | Neglect the width and height and make the widget fit to its text or image.                                                                                                                                                                                                                                                |
 | mcxml_set_from                               | Use attributes of another widget as basis.                                                                                                                                                                                                                                                                                |
 | mcxml_set                                    | Commit modifications made.                                                                                                                                                                                                                                                                                                |
@@ -288,14 +387,14 @@ const char* mcxml_editor_get_selectionColor(const char* id);
 | mcxml_get_textColor  | Get the text color of a widget.<br/>- **id** A widget id.<br/>Return: The text color set to a widget. Supports bar separated values.        |
 | mcxml_get_hintColor  | Get the hint color of a widget.<br/>- **id** A widget id.<br/>Return: The hint color set to a widget. Supports bar separated values.        |
 | mcxml_get_textSize   | Get the text size of a widget.<br/>- **id** A widget id.<br/>Return: The text size set to a widget.                                         |
-| mcxml_get_inputType  | Get the input type of Input.<br/>- **id** The id.<br/>Return: The input type set to Input.                                                  |
+| mcxml_get_type  | Get the input type of Input.<br/>- **id** The id.<br/>Return: The input type set to Input.                                                  |
 | mcxml_get_visible    | Get the visibility of a widget.<br/>- **id** A widget id.<br/>Return: The visibility set to a widget.                                       |
 | mcxml_get_src        | Get the image of Image.<br/>- **id** The id.<br/>Return: Images set to Image. Supports bar separated values.                                |
 | mcxml_get_actions    | Get listeners of a widget.<br/>- **id** A widget id.<br/>Return: Widget listeners of a widget or an empty string if there is no action set. |
 | mcxml_get_cursor     | Get the cursor type of a widget or App.                                                                                                     |
-|mcxml_get_cursor_position|Get the position of the cursor.|
+|mcxml_get_cursor_position| Get the position of the cursor.                                                                                                             |
 | mcxml_get_autoFit    | Get the auto fit value of a widget.                                                                                                         |
-| mcxml_get_from       | Get the ID of the widget used as a basis.                                                                                       |
+| mcxml_get_from       | Get the ID of the widget used as a basis.                                                                                                   |
 
 ---
 #### Text Editor
