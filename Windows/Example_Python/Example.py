@@ -5,7 +5,7 @@
 """
 
 import sys
-from ctypes import *
+sys.path.append('./')
 
 import xml2gui as g
 
