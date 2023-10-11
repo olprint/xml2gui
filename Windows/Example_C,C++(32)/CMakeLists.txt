@@ -3,6 +3,7 @@ project(Example)
 
 find_library(
 	MCXML mcxml32
+	# MCXML libmcxml32 # for Visual Studio.
  	PATHS "../lib_C,C++(32)/"
 )
 
