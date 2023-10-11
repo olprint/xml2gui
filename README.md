@@ -11,13 +11,13 @@
     ![Python 3.8 64 bit](https://img.shields.io/badge/v3.8-64bit-229342)
     ![Python 3.7 64 bit](https://img.shields.io/badge/v3.7-64bit-229342)
     ![Python 3.6 64 bit](https://img.shields.io/badge/v3.6-64bit-229342)
-    ![Python 3.12 32 bit](https://img.shields.io/badge/v3.12-32bit-97C900)
+    ~~![Python 3.12 32 bit](https://img.shields.io/badge/v3.12-32bit-97C900)
     ![Python 3.11 32 bit](https://img.shields.io/badge/v3.11-32bit-97C900)
     ![Python 3.10 32 bit](https://img.shields.io/badge/v3.10-32bit-97C900)
     ![Python 3.9 32 bit](https://img.shields.io/badge/v3.9-32bit-97C900)
     ![Python 3.8 32 bit](https://img.shields.io/badge/v3.8-32bit-97C900)
     ![Python 3.7 32 bit](https://img.shields.io/badge/v3.7-32bit-97C900)
-    ![Python 3.6 32 bit](https://img.shields.io/badge/v3.6-32bit-97C900)
+    ![Python 3.6 32 bit](https://img.shields.io/badge/v3.6-32bit-97C900)~~
 
 ---
 A simple C/C++ program would look like this:
