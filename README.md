@@ -20,6 +20,21 @@
     ![Python 3.6 32 bit](https://img.shields.io/badge/v3.6-32bit-97C900)-->
 
 ---
+#### Programs built with xml2gui
+[Calculator](https://gitlab.com/simple-gui/xml2gui-calculator)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+[---](#)  
+
+---
 A simple C/C++ program would look like this:
 ```c
 int main() {
