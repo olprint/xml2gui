@@ -22,7 +22,7 @@
 ---
 #### Programs built with xml2gui
 [Calculator](https://gitlab.com/simple-gui/xml2gui-calculator)  
-[---](#)  
+[Saints](https://gitlab.com/simple-gui/xml2gui-saints)  
 [---](#)  
 [---](#)  
 [---](#)  
@@ -73,6 +73,7 @@ PASS_YOUR_XML_HERE should be an XML data like the one below:
             top="2*y-y | input,input"
             src="Z:/images/1.png"
             actions="click | drag"
+            order="1"
     />
     <!-- For List, Tree, Table, Chart, pass a JSON file or text to src. -->
 </App>
@@ -219,7 +220,7 @@ width = width of app * 2/3.
 | hintColor      | Widgets       | ↑                                                                                                                                         |
 | background     | All           | textColor="#ff0000"                                                                                                                       |
 | textSize       | Widgets       | textSize="18"                                                                                                                             |
-| type      | Widgets  | type="text"<br/>type="password"<br/>type="int"<br/>type="float"<br/>type="bar"<br/>type="pie"                    |
+| type           | Widgets       | type="text"<br/>type="password"<br/>type="int"<br/>type="float"<br/>type="bar"<br/>type="pie"                                             |
 | left           | Widgets       | left="100"<br/><sup>4</sup>left=". \| app \| true"<br/><sup>5</sup>left="x \| app \| false"<br/><sup>6</sup>left="x * 2/3 \| app \| true" |
 | right          | Widgets       | ↑                                                                                                                                         |
 | top            | Widgets       | ↑                                                                                                                                         |
@@ -236,6 +237,8 @@ width = width of app * 2/3.
 | selection      | Input, Editor | selection="12"<br/>selection="12\|15"                                                                                                     |
 | selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                                                  |
 | wrap           | Editor        | wrap="true"<br/>wrap="false"                                                                                                              |
+| order       | Widgets       | order="1"                                                                                                             |
+| logFile        | App           | logFile="Z:/logs/123.txt"                                                                                                                 |
 ---
 
 ### API
@@ -247,7 +250,8 @@ bool mcxml_remove_widget(const char* id);
 const char* mcxml_measure_text(const char* text, int fontSize);
 void mcxml_select(const char* id);
 const char* mcxml_selected();
-int mcxml_last_count();
+int mcxml_lastCount();
+void mcxml_logFile(const char* value);
 bool mcxml_loop(const char* xml);
 void mcxml_exit();
 
@@ -323,6 +327,7 @@ bool mcxml_get_autoFit(const char* id);
 const char* mcxml_get_from(const char* id);
 const char* mcxml_get_cursor(const char* id);
 const char* mcxml_get_cursor_position();
+const char* mcxml_get_order(const char* id);
 const char* mcxml_editor_get_selection(const char* id);
 const char* mcxml_editor_get_selectionColor(const char* id);
 ```
@@ -331,17 +336,18 @@ const char* mcxml_editor_get_selectionColor(const char* id);
 #### Basic
 
 
-|Function| Description                                                                                                                                                                                                                         |
-|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|mcxml_version| Get the version of this library.<br/>Return: Library version.                                                                                                                                                                        |
-|mcxml_add_widget| Add a new widget.<br/>- **widget** The widget type to add.<br/>- **idNew** A unique id to identify the widget.<br/>- **idDest** The id of App or the id of any Scroll widget.<br/>Return: true if successful, false if unsuccessful. |
-|mcxml_remove_widget| Remove a widget.<br/>- **id** A widget id.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                    |
-|mcxml_measure_text|Get the width and height of a text.|
-|mcxml_select|Select a widget.|
-|mcxml_selected|Get the selected widget.|
-|mcxml_last_count|If 'int*' is returned by any function, mcxml_last_count will hold its size.|
-|mcxml_loop| Start the app.<br/>- **xml** XML/MCXML to run.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                |
-|mcxml_exit| Close the app.                                                                                                                                                                                                                      |
+| Function            | Description                                                                                                                                                                                                                         |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mcxml_version       | Get the version of this library.<br/>Return: Library version.                                                                                                                                                                        |
+| mcxml_add_widget    | Add a new widget.<br/>- **widget** The widget type to add.<br/>- **idNew** A unique id to identify the widget.<br/>- **idDest** The id of App or the id of any Scroll widget.<br/>Return: true if successful, false if unsuccessful. |
+| mcxml_remove_widget | Remove a widget.<br/>- **id** A widget id.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                    |
+| mcxml_measure_text  |Get the width and height of a text.|
+| mcxml_select        |Select a widget.|
+| mcxml_selected      |Get the selected widget.|
+| mcxml_lastCount    |If 'int*' is returned by any function, mcxml_lastCount will hold its size.|
+| mcxml_logFile      |Output errors to a file.|
+| mcxml_loop          | Start the app.<br/>- **xml** XML/MCXML to run.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                |
+| mcxml_exit          | Close the app.                                                                                                                                                                                                                      |
 
 ---
 #### Listeners
@@ -365,65 +371,66 @@ const char* mcxml_editor_get_selectionColor(const char* id);
 ---
 #### Setters
 
-| Function                                     | Description                                                                                                                                                                                                                                                                                                               |
-|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| mcxml_set_width                              | Set the width of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                                   |
-| mcxml_set_height                             | Set the height of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                                  |
-| mcxml_set_widthMin                           | Set the width of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                             |
-| mcxml_set_heightMin                          | Set the height of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                            |
-| mcxml_set_widthMax                           | Set the width of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                             |
-| mcxml_set_heightMax                          | Set the height of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                            |
-| mcxml_set_left                               | Set the left position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                         |
-| mcxml_set_right                              | Set the right position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                        |
-| mcxml_set_top                                | Set the top position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                          |
-| mcxml_set_bottom                             | Set the bottom position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                       |
-| mcxml_set_center                             | Set the center position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                       |
-| mcxml_set_leftOffset                         | Set the left offset of a widget.<br/>This will only be set when 'left' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                             |
-| mcxml_set_rightOffset                        | Set the right offset of a widget.<br/>This will only be set when 'right' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                           |
-| mcxml_set_topOffset                          | Set the top offset of a widget.<br/>This will only be set when 'top' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                               |
-| mcxml_set_bottomOffset                       | Set the bottom offset of a widget.<br/>This will only be set when 'bottom' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                         |
-| mcxml_set_background                         | Set the background color of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                        |
-| mcxml_set_text                               | Set the text of a widget or the title of App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                       |
-| mcxml_set_hint                               | Set the hint of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                                  |
-| mcxml_set_textColor                          | Set the text color of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                             |
-| mcxml_set_hintColor                          | Set the hint color of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                             |
-| mcxml_set_textSize                           | Set the text size of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                             |
-| mcxml_set_type                          | Set the input type of Input.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                                                                    |
-| mcxml_set_visible                            | Set the visibility of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                            |
-| mcxml_set_fullscreen                         | Make App fullscreen.<br/>- **id** The id of App.<br/>- **value** The value to be set.                                                                                                                                                                                                                                     |
-| mcxml_set_src                                | Set the image of Image.<br/>- **id** The id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                          |
+| Function                              | Description                                                                                                                                                                                                                                                                                                               |
+|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mcxml_set_width                       | Set the width of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                                   |
+| mcxml_set_height                      | Set the height of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                                  |
+| mcxml_set_widthMin                    | Set the width of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                             |
+| mcxml_set_heightMin                   | Set the height of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                            |
+| mcxml_set_widthMax                    | Set the width of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                             |
+| mcxml_set_heightMax                   | Set the height of App.<br/>- **id** The id of App.<br/>- **value** The value to be set. Does not support bar separated values.                                                                                                                                                                                            |
+| mcxml_set_left                        | Set the left position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                         |
+| mcxml_set_right                       | Set the right position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                        |
+| mcxml_set_top                         | Set the top position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                          |
+| mcxml_set_bottom                      | Set the bottom position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                       |
+| mcxml_set_center                      | Set the center position of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                       |
+| mcxml_set_leftOffset                  | Set the left offset of a widget.<br/>This will only be set when 'left' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                             |
+| mcxml_set_rightOffset                 | Set the right offset of a widget.<br/>This will only be set when 'right' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                           |
+| mcxml_set_topOffset                   | Set the top offset of a widget.<br/>This will only be set when 'top' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                               |
+| mcxml_set_bottomOffset                | Set the bottom offset of a widget.<br/>This will only be set when 'bottom' is set.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                         |
+| mcxml_set_background                  | Set the background color of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                        |
+| mcxml_set_text                        | Set the text of a widget or the title of App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set.                                                                                                                                                                                                       |
+| mcxml_set_hint                        | Set the hint of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                                  |
+| mcxml_set_textColor                   | Set the text color of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                             |
+| mcxml_set_hintColor                   | Set the hint color of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                             |
+| mcxml_set_textSize                    | Set the text size of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                             |
+| mcxml_set_type                        | Set the input type of Input.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                                                                    |
+| mcxml_set_visible                     | Set the visibility of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                            |
+| mcxml_set_fullscreen                  | Make App fullscreen.<br/>- **id** The id of App.<br/>- **value** The value to be set.                                                                                                                                                                                                                                     |
+| mcxml_set_src                         | Set the image of Image.<br/>- **id** The id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                          |
 | <span id='actions1'>mcxml_set_actions | Set listeners on a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                  |
 | <span id='cursor1'>mcxml_set_cursor   | Set the cursor type of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set. Available values: default, none, insert, hand, drag, cross, help, load, ew (i.e. East-West), ns (i.e. North-South), ne (i.e. North-East), sw (i.e. South-West), nw (i.e. North-West), se (i.e. South-East). |
-| mcxml_set_autoFit                            | Neglect the width and height and make the widget fit to its text or image.                                                                                                                                                                                                                                                |
-| mcxml_set_from                               | Use attributes of another widget as basis.                                                                                                                                                                                                                                                                                |
-| mcxml_set                                    | Commit modifications made.                                                                                                                                                                                                                                                                                                |
+| mcxml_set_autoFit                     | Neglect the width and height and make the widget fit to its text or image.                                                                                                                                                                                                                                                |
+| mcxml_set_from                        | Use attributes of another widget as basis.                                                                                                                                                                                                                                                                                |
+| mcxml_set                             | Commit modifications made.                                                                                                                                                                                                                                                                                                |
 
 ---
 #### Getters
 
-| Function             | Description                                                                                                                                 |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| mcxml_get_width      | Get the width of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The width set to a widget or App.                            |
-| mcxml_get_height     | Get the height of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The height set to a widget or App.                          |
-| mcxml_get_left       | Get the left of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The left set to a widget or App.                              |
-| mcxml_get_right      | Get the right of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The right set to a widget or App.                            |
-| mcxml_get_top        | Get the top of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The top set to a widget or App.                                |
-| mcxml_get_bottom     | Get the bottom of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The bottom set to a widget or App.                          |
-| mcxml_get_center     | Get the center of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The center set to a widget or App.                          |
-| mcxml_get_background | Get the background color of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The background color set to a widget or App.      |
-| mcxml_get_text       | Get the text of a widget or the title of App.<br/>- **id** A widget or App id.<br/>Return: The text set to a widget or the title of App.    |
-| mcxml_get_hint       | Get the hint of a widget.<br/>- **id** A widget id.<br/>Return: The hint set to a widget.                                                   |
-| mcxml_get_textColor  | Get the text color of a widget.<br/>- **id** A widget id.<br/>Return: The text color set to a widget. Supports bar separated values.        |
-| mcxml_get_hintColor  | Get the hint color of a widget.<br/>- **id** A widget id.<br/>Return: The hint color set to a widget. Supports bar separated values.        |
-| mcxml_get_textSize   | Get the text size of a widget.<br/>- **id** A widget id.<br/>Return: The text size set to a widget.                                         |
-| mcxml_get_type  | Get the input type of Input.<br/>- **id** The id.<br/>Return: The input type set to Input.                                                  |
-| mcxml_get_visible    | Get the visibility of a widget.<br/>- **id** A widget id.<br/>Return: The visibility set to a widget.                                       |
-| mcxml_get_src        | Get the image of Image.<br/>- **id** The id.<br/>Return: Images set to Image. Supports bar separated values.                                |
-| mcxml_get_actions    | Get listeners of a widget.<br/>- **id** A widget id.<br/>Return: Widget listeners of a widget or an empty string if there is no action set. |
-| mcxml_get_cursor     | Get the cursor type of a widget or App.                                                                                                     |
-|mcxml_get_cursor_position| Get the position of the cursor.                                                                                                             |
-| mcxml_get_autoFit    | Get the auto fit value of a widget.                                                                                                         |
-| mcxml_get_from       | Get the ID of the widget used as a basis.                                                                                                   |
+| Function                  | Description                                                                                                                                 |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| mcxml_get_width           | Get the width of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The width set to a widget or App.                            |
+| mcxml_get_height          | Get the height of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The height set to a widget or App.                          |
+| mcxml_get_left            | Get the left of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The left set to a widget or App.                              |
+| mcxml_get_right           | Get the right of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The right set to a widget or App.                            |
+| mcxml_get_top             | Get the top of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The top set to a widget or App.                                |
+| mcxml_get_bottom          | Get the bottom of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The bottom set to a widget or App.                          |
+| mcxml_get_center          | Get the center of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The center set to a widget or App.                          |
+| mcxml_get_background      | Get the background color of a widget or App.<br/>- **id** A widget or App id.<br/>Return: The background color set to a widget or App.      |
+| mcxml_get_text            | Get the text of a widget or the title of App.<br/>- **id** A widget or App id.<br/>Return: The text set to a widget or the title of App.    |
+| mcxml_get_hint            | Get the hint of a widget.<br/>- **id** A widget id.<br/>Return: The hint set to a widget.                                                   |
+| mcxml_get_textColor       | Get the text color of a widget.<br/>- **id** A widget id.<br/>Return: The text color set to a widget. Supports bar separated values.        |
+| mcxml_get_hintColor       | Get the hint color of a widget.<br/>- **id** A widget id.<br/>Return: The hint color set to a widget. Supports bar separated values.        |
+| mcxml_get_textSize        | Get the text size of a widget.<br/>- **id** A widget id.<br/>Return: The text size set to a widget.                                         |
+| mcxml_get_type            | Get the input type of Input.<br/>- **id** The id.<br/>Return: The input type set to Input.                                                  |
+| mcxml_get_visible         | Get the visibility of a widget.<br/>- **id** A widget id.<br/>Return: The visibility set to a widget.                                       |
+| mcxml_get_src             | Get the image of Image.<br/>- **id** The id.<br/>Return: Images set to Image. Supports bar separated values.                                |
+| mcxml_get_actions         | Get listeners of a widget.<br/>- **id** A widget id.<br/>Return: Widget listeners of a widget or an empty string if there is no action set. |
+| mcxml_get_cursor          | Get the cursor type of a widget or App.                                                                                                     |
+| mcxml_get_cursor_position | Get the position of the cursor.                                                                                                             |
+| mcxml_get_autoFit         | Get the auto fit value of a widget.                                                                                                         |
+| mcxml_get_from            | Get the ID of the widget used as a basis.                                                                                                   |
+| mcxml_get_order        | Get the order of a widget.                                                                             |
 
 ---
 #### Text Editor
