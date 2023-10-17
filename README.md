@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.4.x)
+## XML to GUI Framework (v0.5.x)
 
 ### Welcome!
 * [x] C/C++ ![C/C++ 64 bit](https://img.shields.io/badge/64bit-229342)
@@ -22,17 +22,17 @@
 ---
 #### Programs built with xml2gui
 [Calculator](https://gitlab.com/simple-gui/xml2gui-calculator)  
+[Clock](https://gitlab.com/simple-gui/xml2gui-clock)  
+[Scientific Clock](https://gitlab.com/simple-gui/xml2gui-scientific-clock)  
 [Saints](https://gitlab.com/simple-gui/xml2gui-saints)  
-[---](#)  
-[---](#)  
-[---](#)  
-[---](#)  
-[---](#)  
-[---](#)  
-[---](#)  
-[---](#)  
-[---](#)  
-[---](#)  
+[Birthday Gift](https://gitlab.com/simple-gui/xml2gui-birthday-gift)  
+[Deathday Gift](https://gitlab.com/simple-gui/xml2gui-deathday-gift)  
+[Bible](https://gitlab.com/simple-gui/xml2gui-bible)  
+[Twitter](https://gitlab.com/simple-gui/xml2gui-twitter)  
+[Blender 2D](https://gitlab.com/simple-gui/xml2gui-blender-2d)  
+[Visual Studio Code Clone](https://gitlab.com/simple-gui/xml2gui-v-s-code-clone)  
+[Google Chrome Clone](https://gitlab.com/simple-gui/xml2gui-google-chrome-clone)  
+[Adverts](https://gitlab.com/simple-gui/xml2gui-calculator)  
 
 ---
 A simple C/C++ program would look like this:
@@ -237,7 +237,7 @@ width = width of app * 2/3.
 | selection      | Input, Editor | selection="12"<br/>selection="12\|15"                                                                                                     |
 | selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                                                  |
 | wrap           | Editor        | wrap="true"<br/>wrap="false"                                                                                                              |
-| order       | Widgets       | order="1"                                                                                                             |
+| order          | Widgets       | order="1"                                                                                                             |
 | logFile        | App           | logFile="Z:/logs/123.txt"                                                                                                                 |
 ---
 
@@ -252,6 +252,9 @@ void mcxml_select(const char* id);
 const char* mcxml_selected();
 int mcxml_lastCount();
 void mcxml_logFile(const char* value);
+void mcxml_repeat(void (*ptr)(), float sec);
+void mcxml_started(void (*ptr)());
+void mcxml_stopped(void (*ptr)());
 bool mcxml_loop(const char* xml);
 void mcxml_exit();
 
@@ -336,18 +339,21 @@ const char* mcxml_editor_get_selectionColor(const char* id);
 #### Basic
 
 
-| Function            | Description                                                                                                                                                                                                                         |
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Function            | Description                                                                                                                                                                                                                          |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | mcxml_version       | Get the version of this library.<br/>Return: Library version.                                                                                                                                                                        |
 | mcxml_add_widget    | Add a new widget.<br/>- **widget** The widget type to add.<br/>- **idNew** A unique id to identify the widget.<br/>- **idDest** The id of App or the id of any Scroll widget.<br/>Return: true if successful, false if unsuccessful. |
 | mcxml_remove_widget | Remove a widget.<br/>- **id** A widget id.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                    |
-| mcxml_measure_text  |Get the width and height of a text.|
-| mcxml_select        |Select a widget.|
-| mcxml_selected      |Get the selected widget.|
-| mcxml_lastCount    |If 'int*' is returned by any function, mcxml_lastCount will hold its size.|
-| mcxml_logFile      |Output errors to a file.|
+| mcxml_measure_text  | Get the width and height of a text.                                                                                                                                                                                                  |
+| mcxml_select        | Select a widget.                                                                                                                                                                                                                     |
+| mcxml_selected      | Get the selected widget.                                                                                                                                                                                                             |
+| mcxml_lastCount     | If 'int*' is returned by any function, mcxml_lastCount will hold its size.                                                                                                                                                           |
+| mcxml_logFile       | Output errors to a file.                                                                                                                                                                                                             |
+| mcxml_repeat        | Pass a function to be called every N seconds. Cancel with nullptr.                                                                                                                                                                   |
+| mcxml_started       | Pass a function to be called after the app has initialized.                                                                                                                                                                          |
+| mcxml_stopped       | Pass a function to be called when the app is just about to exit.                                                                                                                                                                     |
 | mcxml_loop          | Start the app.<br/>- **xml** XML/MCXML to run.<br/>Return: true if successful, false if unsuccessful.                                                                                                                                |
-| mcxml_exit          | Close the app.                                                                                                                                                                                                                      |
+| mcxml_exit          | Close the app.                                                                                                                                                                                                                       |
 
 ---
 #### Listeners
