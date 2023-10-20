@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.5.x)
+## XML to GUI Framework (v0.6.x)
 
 ### Welcome!
 * [x] C/C++ ![C/C++ 64 bit](https://img.shields.io/badge/64bit-229342)
@@ -19,6 +19,11 @@
     ![Python 3.7 32 bit](https://img.shields.io/badge/v3.7-32bit-97C900)
     ![Python 3.6 32 bit](https://img.shields.io/badge/v3.6-32bit-97C900)-->
 
+![C](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_c.png)
+![C++](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_cpp.png)
+![Java](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_java.png)
+![Kotlin](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_kot.png)
+![Python](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_py.png)
 ---
 #### Programs built with xml2gui
 [Calculator](https://gitlab.com/simple-gui/xml2gui-calculator)  
@@ -32,7 +37,7 @@
 [Blender 2D](https://gitlab.com/simple-gui/xml2gui-blender-2d)  
 [Visual Studio Code Clone](https://gitlab.com/simple-gui/xml2gui-v-s-code-clone)  
 [Google Chrome Clone](https://gitlab.com/simple-gui/xml2gui-google-chrome-clone)  
-[Adverts](https://gitlab.com/simple-gui/xml2gui-calculator)  
+[Adverts](https://gitlab.com/simple-gui/xml2gui-adverts)  
 
 ---
 A simple C/C++ program would look like this:
@@ -141,16 +146,13 @@ Tree: `src="JSON_HERE"`
 ```
 
 Table: `src="JSON_HERE"`
-
 ```json
 {
     "mcxml_table_set_widths": "30|100|300",
     "ANYTHING0": {
-        "icon": "",
         "value": "1|Jesus|My Brother"
     },
     "ANYTHING1": {
-        "icon": "",
         "value": "2|Mary|My Mother"
     }
 }
@@ -161,12 +163,24 @@ Chart: `src="JSON_HERE"`
 {
     "mcxml_chart_set_type": "bar",
     "ANYTHING0": {
-        "icon": "",
+        "label": "",
         "value": "80"
     },
     "ANYTHING1": {
-        "icon": "",
+        "label": "",
         "value": "81"
+    }
+}
+```
+
+Choice: `src="JSON_HERE"`
+```json
+{
+    "ANYTHING0": {
+        "value": "Apple"
+    },
+    "ANYTHING1": {
+        "value": "Box"
     }
 }
 ```
@@ -203,7 +217,7 @@ width = width of app * 2/3.
 
 ---
 
-#### Attributes
+#### XML Attributes
 | Attribute      | Application   | Example                                                                                                                                   |
 |----------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | id             | All           | id="myId1"                                                                                                                                |
@@ -237,10 +251,12 @@ width = width of app * 2/3.
 | selection      | Input, Editor | selection="12"<br/>selection="12\|15"                                                                                                     |
 | selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                                                  |
 | wrap           | Editor        | wrap="true"<br/>wrap="false"                                                                                                              |
-| order          | Widgets       | order="1"                                                                                                             |
+| order          | Widgets       | order="1"                                                                                                                                 |
 | logFile        | App           | logFile="Z:/logs/123.txt"                                                                                                                 |
+| progress       | Progress      | progress="0.0"<br/>progress="100.0"                                                                                                       |
 ---
 
+<span id='API'></span>
 ### API
 ```cpp
 // Basic
@@ -304,8 +320,9 @@ void mcxml_set_actions(const char* id, const char* value);
 void mcxml_set_autoFit(const char* id, const char* value);
 void mcxml_set_from(const char* id, const char* value);
 void mcxml_set_cursor(const char* id, const char* value);
-void mcxml_editor_set_selection(const char* id, const char* value);
-void mcxml_editor_set_selectionColor(const char* id, const char* value);
+void mcxml_set_selection(const char* id, const char* value);
+void mcxml_set_selectionColor(const char* id, const char* value);
+void mcxml_set_progress(const char* id, float progress);
 void mcxml_set(); // Needs to be called after other set operations.
 
 // Getters
@@ -331,8 +348,32 @@ const char* mcxml_get_from(const char* id);
 const char* mcxml_get_cursor(const char* id);
 const char* mcxml_get_cursor_position();
 const char* mcxml_get_order(const char* id);
-const char* mcxml_editor_get_selection(const char* id);
-const char* mcxml_editor_get_selectionColor(const char* id);
+const char* mcxml_get_selection(const char* id);
+const char* mcxml_get_selectionColor(const char* id);
+int mcxml_get_progress(const char* id);
+
+// List
+void mcxml_list_item_add(const char* id, const char* itemIcon, const char* value);
+void mcxml_list_item_modify_icon(const char* id, const char* itemIcon, int pos);
+void mcxml_list_item_modify_value(const char* id, const char* value, int pos);
+const char* mcxml_list_item_get(const char* id, int pos);
+void mcxml_list_item_remove(const char* id, int pos);
+int mcxml_list_item_position(const char* id, const char* value);
+void mcxml_list_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
+void mcxml_list_item_select(const char* id, int pos);
+int* mcxml_list_item_selected(const char* id);
+int mcxml_list_item_count(const char* id);
+
+// Web
+bool mcxml_web_find_first(const char* id, const char* value);
+bool mcxml_web_find_last(const char* id, const char* value);
+bool mcxml_web_find_prev(const char* id, const char* value);
+bool mcxml_web_find_next(const char* id, const char* value);
+
+// Check
+void mcxml_check_item_select(const char* id, bool check);
+bool mcxml_check_item_selected(const char* id);
+
 ```
 
 ### Documentation
@@ -443,11 +484,12 @@ const char* mcxml_editor_get_selectionColor(const char* id);
 
 | Function                        | Description                               |
 |---------------------------------|-------------------------------------------|
-| mcxml_editor_set_selection      | Set the insert position or the selection. |
-| mcxml_editor_set_selectionColor | Set the selection color.                  |
-| mcxml_editor_get_selection      | Get the insert position or the selection. |
-| mcxml_editor_get_selectionColor | Get the selection color.                  |
-
+| mcxml_set_selection      | Set the insert position or the selection. |
+| mcxml_set_selectionColor | Set the selection color.                  |
+| mcxml_get_selection      | Get the insert position or the selection. |
+| mcxml_get_selectionColor | Get the selection color.                  |
+---
+*Others are quite intuitive. Check the API section [above](#API).* 
 
 ---
 **Please build apps for Jesus and Mary.**
