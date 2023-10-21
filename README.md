@@ -7,6 +7,7 @@
 ### Welcome!
 * [x] C/C++ ![C/C++ 64 bit](https://img.shields.io/badge/64bit-229342)
     ![C/C++ 32 bit](https://img.shields.io/badge/32bit-97C900)
+* [x] C# ![C# universal](https://img.shields.io/badge/CS-Universal-287DCC)
 * [x] Java/Kotlin ![Java/Kotlin universal](https://img.shields.io/badge/Jar-Universal-287DCC)
 * [x] Python ![Python 3.12 64 bit](https://img.shields.io/badge/v3.12-64bit-229342)
     ![Python 3.11 64 bit](https://img.shields.io/badge/v3.11-64bit-229342)
@@ -25,9 +26,10 @@
 
 ![C](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_c.png)
 ![C++](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_cpp.png)
+![C#](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_csharp.png)
 ![Java](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_java.png)
-![Kotlin](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_kot.png)
-![Python](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_py.png)
+![Kotlin](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_kotlin.png)
+![Python](https://gitlab.com/olprint/xml2gui/-/raw/main/Windows/images/ic_python.png)
 ---
 #### Programs built with xml2gui
 [Calculator](https://gitlab.com/simple-gui/xml2gui-calculator)  
