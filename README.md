@@ -1,5 +1,9 @@
 ## XML to GUI Framework (v0.6.x)
 
+## I BELIEVE IN GOD, THE CREATOR OF HEAVEN AND EARTH
+
+## AND IN JESUS CHRIST HIS ONLY BEGOTTEN SON.
+
 ### Welcome!
 * [x] C/C++ ![C/C++ 64 bit](https://img.shields.io/badge/64bit-229342)
     ![C/C++ 32 bit](https://img.shields.io/badge/32bit-97C900)
