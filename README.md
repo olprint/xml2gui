@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.6.x)
+## XML to GUI Framework (v0.6.5)
 
 ## I believe in God, the creator of heaven and earth.
 
