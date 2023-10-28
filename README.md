@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.6.5)
+## XML to GUI Framework (v0.7.5)
 
 ## I believe in God, the creator of heaven and earth.
 
@@ -152,7 +152,6 @@ Tree: `src="JSON_HERE"`
 Table: `src="JSON_HERE"`
 ```json
 {
-    "mcxml_table_set_widths": "30|100|300",
     "ANYTHING0": {
         "value": "1|Jesus|My Brother"
     },
@@ -165,14 +164,15 @@ Table: `src="JSON_HERE"`
 Chart: `src="JSON_HERE"`
 ```json
 {
-    "mcxml_chart_set_type": "bar",
     "ANYTHING0": {
-        "label": "",
-        "value": "80"
+        "label": "A",
+        "value": "80",
+        "color": "red"
     },
     "ANYTHING1": {
-        "label": "",
-        "value": "81"
+        "label": "B",
+        "value": "81",
+        "color": "green"
     }
 }
 ```
@@ -255,6 +255,7 @@ width = width of app * 2/3.
 | selection      | Input, Editor | selection="12"<br/>selection="12\|15"                                                                                                     |
 | selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                                                  |
 | wrap           | Editor        | wrap="true"<br/>wrap="false"                                                                                                              |
+| editable       | Editor      | editable="true"<br/>editable="false"                                                                                                       |
 | order          | Widgets       | order="1"                                                                                                                                 |
 | logFile        | App           | logFile="Z:/logs/123.txt"                                                                                                                 |
 | progress       | Progress      | progress="0.0"<br/>progress="100.0"                                                                                                       |
@@ -285,6 +286,7 @@ void mcxml_listener_hover(void (*ptr)(const char* id, const char* m));
 void mcxml_listener_drag(void (*ptr)(const char* id, const char* m));
 void mcxml_listener_keyboard(void (*ptr)(const char* id, const char* m));
 void mcxml_listener_resize(void (*ptr)(const char* id, const char* m));
+void mcxml_listener_file(void (*ptr)(const char* id, const char* m));
 
 void mcxml_listener_for_list(void (*ptr)(const char* id, const char* m));
 void mcxml_listener_for_web(void (*ptr)(const char* id, const char* m));
@@ -326,7 +328,8 @@ void mcxml_set_from(const char* id, const char* value);
 void mcxml_set_cursor(const char* id, const char* value);
 void mcxml_set_selection(const char* id, const char* value);
 void mcxml_set_selectionColor(const char* id, const char* value);
-void mcxml_set_progress(const char* id, float progress);
+void mcxml_set_progress(const char* id, const char* value);
+void mcxml_set_editable(const char* id, const char* value);
 void mcxml_set(); // Needs to be called after other set operations.
 
 // Getters
@@ -355,6 +358,7 @@ const char* mcxml_get_order(const char* id);
 const char* mcxml_get_selection(const char* id);
 const char* mcxml_get_selectionColor(const char* id);
 int mcxml_get_progress(const char* id);
+int mcxml_get_editable(const char* id);
 
 // List
 void mcxml_list_item_add(const char* id, const char* itemIcon, const char* value);
@@ -368,6 +372,29 @@ void mcxml_list_item_select(const char* id, int pos);
 int* mcxml_list_item_selected(const char* id);
 int mcxml_list_item_count(const char* id);
 
+// Table
+void mcxml_table_item_add(const char* id, const char* itemIcon, const char* value);
+void mcxml_table_item_modify_icon(const char* id, const char* itemIcon, int pos);
+void mcxml_table_item_modify_value(const char* id, const char* value, int pos);
+const char* mcxml_table_item_get(const char* id, int pos);
+void mcxml_table_item_remove(const char* id, int pos);
+int mcxml_table_item_position(const char* id, const char* value);
+void mcxml_table_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
+void mcxml_table_item_select(const char* id, int pos);
+int* mcxml_table_item_selected(const char* id);
+int mcxml_table_item_count(const char* id);
+
+// Tree
+void mcxml_tree_item_add(const char* id, const char* itemIcon, const char* value);
+void mcxml_tree_item_modify_icon(const char* id, const char* itemIcon, int pos);
+void mcxml_tree_item_modify_value(const char* id, const char* value, int pos);
+const char* mcxml_tree_item_get(const char* id, int pos);
+void mcxml_tree_item_remove(const char* id, int pos);
+int mcxml_tree_item_position(const char* id, const char* value);
+void mcxml_tree_item_select(const char* id, int pos);
+int* mcxml_tree_item_selected(const char* id);
+int mcxml_tree_item_count(const char* id);
+
 // Web
 bool mcxml_web_find_first(const char* id, const char* value);
 bool mcxml_web_find_last(const char* id, const char* value);
@@ -377,6 +404,24 @@ bool mcxml_web_find_next(const char* id, const char* value);
 // Check
 void mcxml_check_item_select(const char* id, bool check);
 bool mcxml_check_item_selected(const char* id);
+
+// Chart
+void mcxml_chart_item_add(const char* id, const char* itemIcon, const char* value);
+void mcxml_chart_item_modify_value(const char* id, const char* value, int pos);
+void mcxml_chart_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
+int mcxml_chart_item_count(const char* id);
+void mcxml_chart_item_bounds(const char* id, double min, double max);
+
+// Choice
+void mcxml_choice_item_add(const char* id, const char* itemIcon, const char* value);
+void mcxml_choice_item_modify_value(const char* id, const char* value, int pos);
+const char* mcxml_choice_item_get(const char* id, int pos);
+void mcxml_choice_item_remove(const char* id, int pos);
+int mcxml_choice_item_position(const char* id, const char* value);
+void mcxml_choice_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
+void mcxml_choice_item_select(const char* id, int pos);
+int* mcxml_choice_item_selected(const char* id);
+int mcxml_choice_item_count(const char* id);
 
 ```
 
