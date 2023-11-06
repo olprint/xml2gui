@@ -1,6 +1,6 @@
 ## XML to GUI Framework (v0.7.5)
 
-## I believe in God, the creator of heaven and earth.
+### Dedicated to Our Lady of La Salette :one:
 
 ### Welcome!
 * [x] C/C++ ![C/C++ 64 bit](https://img.shields.io/badge/64bit-229342)
