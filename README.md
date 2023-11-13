@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.7.5)
+## XML to GUI Framework (v0.8.0)
 
 ### Dedicated to Our Lady of La Salette :one:
 
@@ -219,6 +219,9 @@ width = width of app * 2/3.
 <sup>6</sup> Options by query.  
 **Pivot the other end and** left = x of app * 2/3.
 
+<sup>7</sup> Check type.  
+Use the same value to link Check widgets together.
+
 ---
 
 #### XML Attributes
@@ -238,16 +241,16 @@ width = width of app * 2/3.
 | hintColor      | Widgets       | ↑                                                                                                                                         |
 | background     | All           | textColor="#ff0000"                                                                                                                       |
 | textSize       | Widgets       | textSize="18"                                                                                                                             |
-| type           | Widgets       | type="text"<br/>type="password"<br/>type="int"<br/>type="float"<br/>type="bar"<br/>type="pie"                                             |
 | left           | Widgets       | left="100"<br/><sup>4</sup>left=". \| app \| true"<br/><sup>5</sup>left="x \| app \| false"<br/><sup>6</sup>left="x * 2/3 \| app \| true" |
 | right          | Widgets       | ↑                                                                                                                                         |
 | top            | Widgets       | ↑                                                                                                                                         |
 | bottom         | Widgets       | ↑                                                                                                                                         |
-| center         | Widgets       | ↑                                                                                                                                         |
+| center         | Widgets       | center="50,50"<br/>center=". \| app"<br/>center="x,y \| app,app"                                                                          |
 | leftOffset     | Widgets       | [Options by query](#byQuery)                                                                                                              |
 | rightOffset    | Widgets       | ↑                                                                                                                                         |
 | topOffset      | Widgets       | ↑                                                                                                                                         |
 | bottomOffset   | Widgets       | ↑                                                                                                                                         |
+| type           | Widgets       | type="text"<br/>type="password"<br/>type="int"<br/>type="float"<br/>type="bar"<br/>type="pie"<br/><sup>7</sup>type="12"                  |
 | visible        | Widgets       | visible="true"<br/>visible="false"                                                                                                        |
 | cursor         | All           | [Explained here](#cursor1)                                                                                                                |
 | actions        | Widgets       | [Explained here](#actions1)                                                                                                               |
