@@ -49,6 +49,7 @@ class MCXML {
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_type(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_visible(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_fullscreen(string id, string value);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_maximize(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_src(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_actions(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_autoFit(string id, string value);

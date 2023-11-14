@@ -1,4 +1,4 @@
-## XML to GUI Framework (v0.8.0)
+## XML to GUI Framework (v0.8.1)
 
 ### Dedicated to Our Lady of La Salette :one:
 
