@@ -57,7 +57,9 @@ class MCXML {
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_cursor(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_selection(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_selectionColor(string id, string value);
-    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_progress(string id, float progress);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_progress(string id, string value);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_editable(string id, string value);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set_pixels(string id, IntPtr value, int width, int height, int depth);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_set(); // Needs to be called after other set operations.
 
     // Getters
@@ -85,7 +87,8 @@ class MCXML {
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_get_order(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_get_selection(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_get_selectionColor(string id);
-    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  int mcxml_get_progress(string id);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  string mcxml_get_progress(string id);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  string mcxml_get_editable(string id);
 
     // List
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_list_item_add(string id, string itemIcon, string value);
