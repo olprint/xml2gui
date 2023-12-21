@@ -1,3 +1,5 @@
+# 🎄
+
 ## XML to GUI Framework (v0.8.1)
 
 ### Dedicated to Our Lady of La Salette :one:
@@ -111,6 +113,7 @@ But make sure you have something else in ```src="YOUR_IMAGE_HERE"``` since you d
 - Chart
 - Progress
 - Choice
+- Frame
 ---
 
 #### Data for Image, List, Tree, Table & Chart
@@ -235,6 +238,7 @@ Use the same value to link Check widgets together.
 | widthMax       | App           | ↑                                                                                                                                         |
 | heightMax      | App           | ↑                                                                                                                                         |
 | fullscreen     | App           | fullscreen="true"<br/>fullscreen="false"                                                                                                  |
+| maximize       | App           | maximize="true"<br/>maximize="false"                                                                                                      |
 | text           | All           | text="Christlike"                                                                                                                         |
 | hint           | Widgets       | ↑                                                                                                                                         |
 | textColor      | Widgets       | textColor="#ff0000"<br/>textColor="#ff0000 \| #ffff00"                                                                                    |
@@ -250,7 +254,7 @@ Use the same value to link Check widgets together.
 | rightOffset    | Widgets       | ↑                                                                                                                                         |
 | topOffset      | Widgets       | ↑                                                                                                                                         |
 | bottomOffset   | Widgets       | ↑                                                                                                                                         |
-| type           | Widgets       | type="text"<br/>type="password"<br/>type="int"<br/>type="float"<br/>type="bar"<br/>type="pie"<br/><sup>7</sup>type="12"                  |
+| type           | Widgets       | type="text"<br/>type="password"<br/>type="int"<br/>type="float"<br/>type="bar"<br/>type="pie"<br/><sup>7</sup>type="12"                   |
 | visible        | Widgets       | visible="true"<br/>visible="false"                                                                                                        |
 | cursor         | All           | [Explained here](#cursor1)                                                                                                                |
 | actions        | Widgets       | [Explained here](#actions1)                                                                                                               |
@@ -258,7 +262,7 @@ Use the same value to link Check widgets together.
 | selection      | Input, Editor | selection="12"<br/>selection="12\|15"                                                                                                     |
 | selectionColor | Input, Editor | selectionColor="#9999ff"                                                                                                                  |
 | wrap           | Editor        | wrap="true"<br/>wrap="false"                                                                                                              |
-| editable       | Editor      | editable="true"<br/>editable="false"                                                                                                       |
+| editable       | Editor      | editable="true"<br/>editable="false"                                                                                                      |
 | order          | Widgets       | order="1"                                                                                                                                 |
 | logFile        | App           | logFile="Z:/logs/123.txt"                                                                                                                 |
 | progress       | Progress      | progress="0.0"<br/>progress="100.0"                                                                                                       |
@@ -324,6 +328,7 @@ void mcxml_set_textSize(const char* id, const char* value);
 void mcxml_set_type(const char* id, const char* value);
 void mcxml_set_visible(const char* id, const char* value);
 void mcxml_set_fullscreen(const char* id, const char* value);
+void mcxml_set_maximize(const char* id, const char* value);
 void mcxml_set_src(const char* id, const char* value);
 void mcxml_set_actions(const char* id, const char* value);
 void mcxml_set_autoFit(const char* id, const char* value);
@@ -331,8 +336,9 @@ void mcxml_set_from(const char* id, const char* value);
 void mcxml_set_cursor(const char* id, const char* value);
 void mcxml_set_selection(const char* id, const char* value);
 void mcxml_set_selectionColor(const char* id, const char* value);
-void mcxml_set_progress(const char* id, const char* value);
+void mcxml_set_progress(const char* id, const char* value); // Progress widget
 void mcxml_set_editable(const char* id, const char* value);
+void mcxml_set_pixels(const char* id, unsigned char* value, int width, int height, int depth); // Frame widget
 void mcxml_set(); // Needs to be called after other set operations.
 
 // Getters
@@ -496,6 +502,7 @@ int mcxml_choice_item_count(const char* id);
 | mcxml_set_type                        | Set the input type of Input.<br/>- **id** The id.<br/>- **value** The value to be set.                                                                                                                                                                                                                                    |
 | mcxml_set_visible                     | Set the visibility of a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set.                                                                                                                                                                                                                            |
 | mcxml_set_fullscreen                  | Make App fullscreen.<br/>- **id** The id of App.<br/>- **value** The value to be set.                                                                                                                                                                                                                                     |
+| mcxml_set_maximize                    | Make App maximized.<br/>- **id** The id of App.<br/>- **value** The value to be set.                                                                                                                                                                                                                                      |
 | mcxml_set_src                         | Set the image of Image.<br/>- **id** The id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                          |
 | <span id='actions1'>mcxml_set_actions | Set listeners on a widget.<br/>- **id** A widget id.<br/>- **value** The value to be set. Supports bar separated values.                                                                                                                                                                                                  |
 | <span id='cursor1'>mcxml_set_cursor   | Set the cursor type of a widget or App.<br/>- **id** A widget or App id.<br/>- **value** The value to be set. Available values: default, none, insert, hand, drag, cross, help, load, ew (i.e. East-West), ns (i.e. North-South), ne (i.e. North-East), sw (i.e. South-West), nw (i.e. North-West), se (i.e. South-East). |
