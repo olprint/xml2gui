@@ -96,6 +96,7 @@ class MCXML {
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_list_item_modify_value(string id, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_list_item_get(string id, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_list_item_remove(string id, int pos);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_list_item_clear(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  int mcxml_list_item_position(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_list_item_insert(string id, string itemIcon, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_list_item_select(string id, int pos);
@@ -108,6 +109,7 @@ class MCXML {
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_table_item_modify_value(string id, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_table_item_get(string id, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_table_item_remove(string id, int pos);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_table_item_clear(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  int mcxml_table_item_position(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_table_item_insert(string id, string itemIcon, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_table_item_select(string id, int pos);
@@ -120,6 +122,7 @@ class MCXML {
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_tree_item_modify_value(string id, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_tree_item_get(string id, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_tree_item_remove(string id, int pos);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_tree_item_clear(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  int mcxml_tree_item_position(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_tree_item_select(string id, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_tree_item_selected(string id); // int*
@@ -138,6 +141,7 @@ class MCXML {
     // Chart
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_chart_item_add(string id, string itemIcon, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_chart_item_modify_value(string id, string value, int pos);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_chart_item_clear(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_chart_item_insert(string id, string itemIcon, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  int mcxml_chart_item_count(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_chart_item_bounds(string id, double min, double max);
@@ -147,6 +151,7 @@ class MCXML {
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_choice_item_modify_value(string id, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  IntPtr mcxml_choice_item_get(string id, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_choice_item_remove(string id, int pos);
+    [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_choice_item_clear(string id);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  int mcxml_choice_item_position(string id, string value);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_choice_item_insert(string id, string itemIcon, string value, int pos);
     [DllImport("libmcxml64.dll", CharSet = CharSet.Ansi)] public static extern  void mcxml_choice_item_select(string id, int pos);

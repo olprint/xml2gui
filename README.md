@@ -1,6 +1,6 @@
 # 🎄
 
-## XML to GUI Framework (v0.8.8)
+## XML to GUI Framework (v0.9.0)
 
 ### Dedicated to Our Lady of La Salette :one:
 
@@ -273,17 +273,17 @@ Use the same value to link Check widgets together.
 ```cpp
 // Basic
 const char* mcxml_version();
-bool mcxml_add_widget(const char* widget, const char* idNew, const char* idDest);
-bool mcxml_remove_widget(const char* id);
+bool mcxml_add_widget(const char* widget, const char* idNew, const char* idDest); // UI thread.
+bool mcxml_remove_widget(const char* id); // UI thread.
 const char* mcxml_measure_text(const char* text, int fontSize);
-void mcxml_select(const char* id);
+void mcxml_select(const char* id); // UI thread.
 const char* mcxml_selected();
 int mcxml_lastCount();
 void mcxml_logFile(const char* value);
 void mcxml_repeat(void (*ptr)(), float sec);
 void mcxml_started(void (*ptr)());
 void mcxml_stopped(void (*ptr)());
-bool mcxml_loop(const char* xml);
+bool mcxml_loop(const char* xml); // UI thread.
 void mcxml_exit();
 
 // Listeners
@@ -339,7 +339,7 @@ void mcxml_set_selectionColor(const char* id, const char* value);
 void mcxml_set_progress(const char* id, const char* value); // Progress widget
 void mcxml_set_editable(const char* id, const char* value);
 void mcxml_set_pixels(const char* id, unsigned char* value, int width, int height, int depth); // Frame widget
-void mcxml_set(); // Needs to be called after other set operations.
+void mcxml_set(); // Needs to be called after other set operations. // UI thread.
 
 // Getters
 int mcxml_get_width(const char* id);
@@ -370,65 +370,70 @@ int mcxml_get_progress(const char* id);
 int mcxml_get_editable(const char* id);
 
 // List
-void mcxml_list_item_add(const char* id, const char* itemIcon, const char* value);
-void mcxml_list_item_modify_icon(const char* id, const char* itemIcon, int pos);
-void mcxml_list_item_modify_value(const char* id, const char* value, int pos);
+void mcxml_list_item_add(const char* id, const char* itemIcon, const char* value); // UI thread.
+void mcxml_list_item_modify_icon(const char* id, const char* itemIcon, int pos); // UI thread.
+void mcxml_list_item_modify_value(const char* id, const char* value, int pos); // UI thread.
 const char* mcxml_list_item_get(const char* id, int pos);
-void mcxml_list_item_remove(const char* id, int pos);
+void mcxml_list_item_remove(const char* id, int pos); // UI thread.
+void mcxml_list_item_clear(const char* id); // UI thread.
 int mcxml_list_item_position(const char* id, const char* value);
-void mcxml_list_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
-void mcxml_list_item_select(const char* id, int pos);
+void mcxml_list_item_insert(const char* id, const char* itemIcon, const char* value, int pos); // UI thread.
+void mcxml_list_item_select(const char* id, int pos); // UI thread.
 int* mcxml_list_item_selected(const char* id);
 int mcxml_list_item_count(const char* id);
 
 // Table
-void mcxml_table_item_add(const char* id, const char* itemIcon, const char* value);
-void mcxml_table_item_modify_icon(const char* id, const char* itemIcon, int pos);
-void mcxml_table_item_modify_value(const char* id, const char* value, int pos);
+void mcxml_table_item_add(const char* id, const char* itemIcon, const char* value); // UI thread.
+void mcxml_table_item_modify_icon(const char* id, const char* itemIcon, int pos); // UI thread.
+void mcxml_table_item_modify_value(const char* id, const char* value, int pos); // UI thread.
 const char* mcxml_table_item_get(const char* id, int pos);
-void mcxml_table_item_remove(const char* id, int pos);
+void mcxml_table_item_remove(const char* id, int pos); // UI thread.
+void mcxml_table_item_clear(const char* id); // UI thread.
 int mcxml_table_item_position(const char* id, const char* value);
-void mcxml_table_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
-void mcxml_table_item_select(const char* id, int pos);
+void mcxml_table_item_insert(const char* id, const char* itemIcon, const char* value, int pos); // UI thread.
+void mcxml_table_item_select(const char* id, int pos); // UI thread.
 int* mcxml_table_item_selected(const char* id);
 int mcxml_table_item_count(const char* id);
 
 // Tree
-void mcxml_tree_item_add(const char* id, const char* itemIcon, const char* value);
-void mcxml_tree_item_modify_icon(const char* id, const char* itemIcon, int pos);
-void mcxml_tree_item_modify_value(const char* id, const char* value, int pos);
+void mcxml_tree_item_add(const char* id, const char* itemIcon, const char* value); // UI thread.
+void mcxml_tree_item_modify_icon(const char* id, const char* itemIcon, int pos); // UI thread.
+void mcxml_tree_item_modify_value(const char* id, const char* value, int pos); // UI thread.
 const char* mcxml_tree_item_get(const char* id, int pos);
-void mcxml_tree_item_remove(const char* id, int pos);
+void mcxml_tree_item_remove(const char* id, int pos); // UI thread.
+void mcxml_tree_item_clear(const char* id); // UI thread.
 int mcxml_tree_item_position(const char* id, const char* value);
-void mcxml_tree_item_select(const char* id, int pos);
+void mcxml_tree_item_select(const char* id, int pos); // UI thread.
 int* mcxml_tree_item_selected(const char* id);
 int mcxml_tree_item_count(const char* id);
 
 // Web
-bool mcxml_web_find_first(const char* id, const char* value);
-bool mcxml_web_find_last(const char* id, const char* value);
-bool mcxml_web_find_prev(const char* id, const char* value);
-bool mcxml_web_find_next(const char* id, const char* value);
+bool mcxml_web_find_first(const char* id, const char* value); // UI thread.
+bool mcxml_web_find_last(const char* id, const char* value); // UI thread.
+bool mcxml_web_find_prev(const char* id, const char* value); // UI thread.
+bool mcxml_web_find_next(const char* id, const char* value); // UI thread.
 
 // Check
-void mcxml_check_item_select(const char* id, bool check);
+void mcxml_check_item_select(const char* id, bool check); // UI thread.
 bool mcxml_check_item_selected(const char* id);
 
 // Chart
-void mcxml_chart_item_add(const char* id, const char* itemIcon, const char* value);
-void mcxml_chart_item_modify_value(const char* id, const char* value, int pos);
-void mcxml_chart_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
+void mcxml_chart_item_add(const char* id, const char* itemIcon, const char* value); // UI thread.
+void mcxml_chart_item_modify_value(const char* id, const char* value, int pos); // UI thread.
+void mcxml_chart_item_clear(const char* id); // UI thread.
+void mcxml_chart_item_insert(const char* id, const char* itemIcon, const char* value, int pos); // UI thread.
 int mcxml_chart_item_count(const char* id);
 void mcxml_chart_item_bounds(const char* id, double min, double max);
 
 // Choice
-void mcxml_choice_item_add(const char* id, const char* itemIcon, const char* value);
-void mcxml_choice_item_modify_value(const char* id, const char* value, int pos);
+void mcxml_choice_item_add(const char* id, const char* itemIcon, const char* value); // UI thread.
+void mcxml_choice_item_modify_value(const char* id, const char* value, int pos); // UI thread.
 const char* mcxml_choice_item_get(const char* id, int pos);
-void mcxml_choice_item_remove(const char* id, int pos);
+void mcxml_choice_item_remove(const char* id, int pos); // UI thread.
+void mcxml_choice_item_clear(const char* id); // UI thread.
 int mcxml_choice_item_position(const char* id, const char* value);
-void mcxml_choice_item_insert(const char* id, const char* itemIcon, const char* value, int pos);
-void mcxml_choice_item_select(const char* id, int pos);
+void mcxml_choice_item_insert(const char* id, const char* itemIcon, const char* value, int pos); // UI thread.
+void mcxml_choice_item_select(const char* id, int pos); // UI thread.
 int* mcxml_choice_item_selected(const char* id);
 int mcxml_choice_item_count(const char* id);
 
