@@ -5,4 +5,4 @@ Copy everything inside 'lib_Java,Kotlin(All)' folder to this folder.
 
 # ------------ Java/Kotlin ------------
 [Option 1: IDE] Import xml2gui-0.9.1.jar and the IDE will handle the rest.
-[Option 2: Command Line] java --class-path 'xml2gui-0.9.0.jar' Example.java
+[Option 2: Command Line] java --class-path 'xml2gui-0.9.1.jar' Example.java
