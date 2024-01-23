@@ -1,6 +1,6 @@
 # 🎄
 
-## XML to GUI Framework (v0.9.7)
+## XML to GUI Framework (v0.9.8)
 
 ### Dedicated to Our Lady of La Salette :one:
 
