@@ -339,6 +339,7 @@ void mcxml_set_selection(const char* id, const char* value);
 void mcxml_set_selectionColor(const char* id, const char* value);
 void mcxml_set_progress(const char* id, const char* value); // Progress widget
 void mcxml_set_editable(const char* id, const char* value);
+void mcxml_set_scroll(const char* id, const char* value);
 void mcxml_set_pixels(const char* id, unsigned char* value, int width, int height, int depth); // Frame widget
 void mcxml_set(); // Needs to be called after other set operations. // UI thread.
 
@@ -367,8 +368,10 @@ const char* mcxml_get_cursor_position();
 const char* mcxml_get_order(const char* id);
 const char* mcxml_get_selection(const char* id);
 const char* mcxml_get_selectionColor(const char* id);
-int mcxml_get_progress(const char* id);
-int mcxml_get_editable(const char* id);
+const char* mcxml_get_progress(const char* id);
+const char* mcxml_get_editable(const char* id);
+const char* mcxml_get_info(const char* id);
+const char* mcxml_get_scroll(const char* id);
 
 // List
 void mcxml_list_item_add(const char* id, const char* itemIcon, const char* value); // UI thread.
