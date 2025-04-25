@@ -4,8 +4,6 @@
 
 ### Dedicated to Our Lady of La Salette
 
-<img src="QR_Code.png" alt="QR Code" height="200">
-
 ### Welcome!
 * [x] C/C++ ![C/C++ 64 bit](https://img.shields.io/badge/64bit-229342)
     ![C/C++ 32 bit](https://img.shields.io/badge/32bit-97C900)
